@@ -2,4 +2,5 @@
     <string name="app_name">Sport News</string>
 
     <string name="error">An error occurred, please check your connection</string>
+    <string name="open.article">Open article</string>
 </resources>

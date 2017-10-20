@@ -1,5 +1,6 @@
 package com.gonin.news.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
@@ -11,6 +12,7 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import bind
+import com.gonin.news.EXTRA_ARTICLE
 import com.gonin.news.R
 import com.gonin.news.api.NewsService
 import com.gonin.news.apiKey
@@ -19,7 +21,7 @@ import com.gonin.news.source
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class NewsListActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener  {
+class NewsListActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
 
     //TODO MVP
 
@@ -62,8 +64,11 @@ class NewsListActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListen
     }
 
     fun setArticlesList(articles: Articles) {
-        var adapter = ArticlesAdapter(articles)
-        recyclerView.adapter = adapter
+        recyclerView.adapter = ArticlesAdapter(articles) {
+            val detailIntent = Intent(this, ArticleDetailActivity::class.java)
+            detailIntent.putExtra(EXTRA_ARTICLE, it)
+            startActivity(detailIntent)
+        }
         //TODO listener
         //TODO Detail activity with internet intent
     }
