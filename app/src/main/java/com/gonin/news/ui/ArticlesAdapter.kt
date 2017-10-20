@@ -8,8 +8,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import bind
 import com.gonin.news.R
+import com.gonin.news.dateFormat
 import com.gonin.news.model.Articles
 import com.gonin.news.model.ArticlesItem
+import com.gonin.news.newDateFormat
 import inflate
 import loadImg
 
@@ -26,8 +28,14 @@ class ArticlesAdapter(
 
         holder.image.loadImg(article!!.urlToImage!!)
         holder.title.text = article.title
-        holder.date.text = article.publishedAt
-        //TODO format date
+
+        try {
+            val articleDate = dateFormat.parse(article.publishedAt)
+            val formattedDate = newDateFormat.format(articleDate)
+            holder.date.text = formattedDate
+        } catch (e: Exception) {
+            // date ex
+        }
 
         holder.layout.setOnClickListener { clickListener(article) }
     }

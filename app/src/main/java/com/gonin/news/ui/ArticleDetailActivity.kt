@@ -10,7 +10,9 @@ import android.widget.TextView
 import bind
 import com.gonin.news.EXTRA_ARTICLE
 import com.gonin.news.R
+import com.gonin.news.dateFormat
 import com.gonin.news.model.ArticlesItem
+import com.gonin.news.newDateFormat
 import com.jakewharton.rxbinding2.view.RxView
 import loadImg
 
@@ -34,8 +36,16 @@ class ArticleDetailActivity : AppCompatActivity() {
         image.loadImg(article.urlToImage!!)
 
         title.text = article.title
-        author.text = article.author
-        date.text = article.publishedAt
+        author.text = "by ${article.author}"
+
+        try {
+            val articleDate = dateFormat.parse(article.publishedAt)
+            val formattedDate = newDateFormat.format(articleDate)
+            date.text = formattedDate
+        } catch (e: Exception) {
+            // date ex
+        }
+
         desc.text = article.description
 
         RxView.clicks(button).subscribe {
