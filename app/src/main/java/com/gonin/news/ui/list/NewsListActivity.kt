@@ -1,4 +1,4 @@
-package com.gonin.news.ui
+package com.gonin.news.ui.list
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
@@ -15,21 +14,18 @@ import bind
 import com.gonin.news.EXTRA_ARTICLE
 import com.gonin.news.R
 import com.gonin.news.api.NewsService
-import com.gonin.news.apiKey
 import com.gonin.news.model.Articles
-import com.gonin.news.source
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import com.gonin.news.ui.detail.ArticleDetailActivity
 
-class NewsListActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
+class NewsListActivity : AppCompatActivity(),
+        NewsListContract.View,
+        SwipeRefreshLayout.OnRefreshListener {
 
-    //TODO MVP
+    private lateinit var presenter: NewsListContract.Presenter
 
     private val progressBar by bind<ProgressBar>(R.id.progress_bar)
     private val recyclerView by bind<RecyclerView>(R.id.list)
     private val swipeLayout by bind<SwipeRefreshLayout>(R.id.swipe_refresh)
-
-    private val client = NewsService()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +35,10 @@ class NewsListActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListen
 
         setUpRecyclerView()
 
-        getArticles()
+        val client = NewsService()
+
+        NewsListPresenter(this, client)
+        presenter.start()
     }
 
     private fun setUpRecyclerView() {
@@ -48,37 +47,29 @@ class NewsListActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListen
         recyclerView.setHasFixedSize(true)
     }
 
-    private fun getArticles() {
-        client.api.getArticles(source, apiKey)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe({ articles ->
-                    Log.d("articles", articles.toString())
-
-                    setArticlesList(articles)
-                    hideProgress()
-                }, { error ->
-                    error.printStackTrace()
-                    Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show()
-                })
+    override fun setPresenter(presenter: NewsListContract.Presenter) {
+        this.presenter = presenter
     }
 
-    fun setArticlesList(articles: Articles) {
+    override fun showErrorMessage() {
+        Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun setArticlesList(articles: Articles) {
         recyclerView.adapter = ArticlesAdapter(articles) {
             val detailIntent = Intent(this, ArticleDetailActivity::class.java)
             detailIntent.putExtra(EXTRA_ARTICLE, it)
             startActivity(detailIntent)
         }
-        //TODO listener
-        //TODO Detail activity with internet intent
     }
 
-    fun hideProgress() {
+    override fun hideProgress() {
         progressBar.visibility = View.GONE
         swipeLayout.isRefreshing = false
     }
 
     override fun onRefresh() {
-        getArticles()
+        presenter.getArticles()
     }
+
 }

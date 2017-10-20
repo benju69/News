@@ -1,8 +1,8 @@
-package com.gonin.news.ui
+package com.gonin.news.ui.detail
 
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.support.customtabs.CustomTabsIntent
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.ImageView
@@ -50,10 +50,15 @@ class ArticleDetailActivity : AppCompatActivity() {
 
         RxView.clicks(button).subscribe {
             // Web intent : open the browser, or use chrome custom tab
-            val webIntent = Intent(Intent.ACTION_VIEW)
-            webIntent.data = Uri.parse(article.url)
-            startActivity(webIntent)
+            openArticleUrl(article)
         }
+    }
+
+    private fun openArticleUrl(article: ArticlesItem) {
+        val builder = CustomTabsIntent.Builder()
+        val customTabsIntent = builder.build()
+        builder.setToolbarColor(getColor(R.color.colorPrimary))
+        customTabsIntent.launchUrl(this, Uri.parse(article.url))
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

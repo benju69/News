@@ -1,4 +1,4 @@
-package com.gonin.news.ui
+package com.gonin.news.ui.list
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
