@@ -1,8 +1,8 @@
 package com.gonin.news.ui.list
 
 import com.gonin.news.model.Articles
-import me.benju.sounds.ui.BasePresenter
-import me.benju.sounds.ui.BaseView
+import com.gonin.news.ui.BasePresenter
+import com.gonin.news.ui.BaseView
 
 /**
  * Created by benju on 20/10/2017.
