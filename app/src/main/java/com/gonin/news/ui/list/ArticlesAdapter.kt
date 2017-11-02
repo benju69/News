@@ -21,16 +21,19 @@ import loadImg
 class ArticlesAdapter(
         private val articles: Articles,
         private val clickListener: (ArticlesItem) -> Unit
-) : RecyclerView.Adapter<ArticlesAdapter.ViewHolder>(){
+) : RecyclerView.Adapter<ArticlesAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val article = articles.articles!![position]
 
-        holder.image.loadImg(article!!.urlToImage!!)
-        holder.title.text = article.title
+        val url = article!!.urlToImage
+        if (url != null) {
+            holder.image.loadImg(url)
+        }
+        holder.title.text = article!!.title
 
         try {
-            val articleDate = dateFormat.parse(article.publishedAt)
+            val articleDate = dateFormat.parse(article!!.publishedAt)
             val formattedDate = newDateFormat.format(articleDate)
             holder.date.text = formattedDate
         } catch (e: Exception) {
@@ -40,13 +43,10 @@ class ArticlesAdapter(
         holder.layout.setOnClickListener { clickListener(article) }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(parent.inflate(R.layout.item_article, false))
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+            ViewHolder(parent.inflate(R.layout.item_article, false))
 
-    override fun getItemCount(): Int {
-        return articles.articles!!.size
-    }
+    override fun getItemCount(): Int = articles.articles!!.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val image by itemView.bind<ImageView>(R.id.image)

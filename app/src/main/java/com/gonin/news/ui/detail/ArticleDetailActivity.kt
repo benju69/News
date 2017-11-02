@@ -1,5 +1,6 @@
 package com.gonin.news.ui.detail
 
+import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
 import android.support.customtabs.CustomTabsIntent
@@ -25,6 +26,7 @@ class ArticleDetailActivity : AppCompatActivity() {
     private val desc by bind<TextView>(R.id.descDetail)
     private val button by bind<TextView>(R.id.openArticleButton)
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_article_detail)
@@ -33,7 +35,12 @@ class ArticleDetailActivity : AppCompatActivity() {
 
         val article = intent.getParcelableExtra<ArticlesItem>(EXTRA_ARTICLE)
 
-        image.loadImg(article.urlToImage!!)
+//        image.loadImg(article.urlToImage!!)
+
+        val url = article!!.urlToImage
+        if (url != null) {
+            image.loadImg(url)
+        }
 
         title.text = article.title
         author.text = "by ${article.author}"
