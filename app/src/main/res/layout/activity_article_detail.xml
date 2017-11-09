@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content"
@@ -9,14 +8,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/imageDetail"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            app:srcCompat="@drawable/ic_error_outline_black_24dp"/>
+            android:transitionName="image"
+            app:srcCompat="@drawable/ic_error_outline_black_24dp"
+            tools:targetApi="lollipop" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,7 +33,7 @@
                 android:layout_margin="@dimen/small_padding"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                tools:text="title"/>
+                tools:text="title" />
 
             <TextView
                 android:id="@+id/authorDetail"
@@ -40,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_padding"
                 android:textColor="@color/black"
-                tools:text="author"/>
+                tools:text="author" />
 
             <TextView
                 android:id="@+id/dateDetail"
@@ -48,21 +49,21 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_padding"
                 android:textColor="@color/black"
-                tools:text="date"/>
+                tools:text="date" />
 
             <TextView
                 android:id="@+id/descDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_padding"
-                tools:text="desc"/>
+                tools:text="desc" />
 
             <Button
                 android:id="@+id/openArticleButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_padding"
-                android:text="@string/open.article"/>
+                android:text="@string/open.article" />
 
         </LinearLayout>
 

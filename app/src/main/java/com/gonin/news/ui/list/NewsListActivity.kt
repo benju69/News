@@ -1,13 +1,16 @@
 package com.gonin.news.ui.list
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
 import bind
@@ -15,6 +18,7 @@ import com.gonin.news.EXTRA_ARTICLE
 import com.gonin.news.R
 import com.gonin.news.api.NewsService
 import com.gonin.news.model.Articles
+import com.gonin.news.model.ArticlesItem
 import com.gonin.news.ui.detail.ArticleDetailActivity
 
 class NewsListActivity : AppCompatActivity(),
@@ -56,10 +60,17 @@ class NewsListActivity : AppCompatActivity(),
     }
 
     override fun setArticlesList(articles: Articles) {
-        recyclerView.adapter = ArticlesAdapter(articles) {
+        recyclerView.adapter = ArticlesAdapter(articles) { articlesItem: ArticlesItem, imageView: ImageView ->
             val detailIntent = Intent(this, ArticleDetailActivity::class.java)
-            detailIntent.putExtra(EXTRA_ARTICLE, it)
-            startActivity(detailIntent)
+            detailIntent.putExtra(EXTRA_ARTICLE, articlesItem)
+            val options = ActivityOptionsCompat
+                    .makeSceneTransitionAnimation(this, imageView, "image")
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                startActivity(detailIntent, options.toBundle())
+            } else {
+                startActivity(detailIntent)
+            }
         }
     }
 

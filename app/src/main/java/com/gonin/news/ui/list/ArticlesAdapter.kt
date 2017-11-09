@@ -20,7 +20,7 @@ import loadImg
  */
 class ArticlesAdapter(
         private val articles: Articles,
-        private val clickListener: (ArticlesItem) -> Unit
+        private val clickListener: (ArticlesItem, ImageView) -> Unit
 ) : RecyclerView.Adapter<ArticlesAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -40,7 +40,7 @@ class ArticlesAdapter(
             // date ex
         }
 
-        holder.layout.setOnClickListener { clickListener(article) }
+        holder.layout.setOnClickListener { clickListener(article, holder.image) }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
