@@ -1,9 +1,11 @@
 package com.gonin.news.ui.detail
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.customtabs.CustomTabsIntent
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.ImageView
@@ -14,6 +16,7 @@ import com.gonin.news.R
 import com.gonin.news.dateFormat
 import com.gonin.news.model.ArticlesItem
 import com.gonin.news.newDateFormat
+import com.gonin.news.util.openUrlInCustomTab
 import com.jakewharton.rxbinding2.view.RxView
 import loadImg
 
@@ -35,8 +38,6 @@ class ArticleDetailActivity : AppCompatActivity() {
 
         val article = intent.getParcelableExtra<ArticlesItem>(EXTRA_ARTICLE)
 
-//        image.loadImg(article.urlToImage!!)
-
         val url = article!!.urlToImage
         if (url != null) {
             image.loadImg(url)
@@ -56,16 +57,9 @@ class ArticleDetailActivity : AppCompatActivity() {
         desc.text = article.description
 
         RxView.clicks(button).subscribe {
-            // Web intent : open the browser, or use chrome custom tab
-            openArticleUrl(article)
+            // Web intent : use chrome custom tab
+            openUrlInCustomTab(article.url, this)
         }
-    }
-
-    private fun openArticleUrl(article: ArticlesItem) {
-        val builder = CustomTabsIntent.Builder()
-        val customTabsIntent = builder.build()
-        builder.setToolbarColor(getColor(R.color.colorPrimary))
-        customTabsIntent.launchUrl(this, Uri.parse(article.url))
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
