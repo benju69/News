@@ -1,10 +1,12 @@
 import android.app.Activity
+import android.content.Context
 import android.support.annotation.IdRes
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
@@ -48,4 +50,12 @@ fun ImageView.loadImg(imageUrl: String) {
             .load(imageUrl)
             .apply(options)
             .into(this)
+}
+
+fun Context.toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(this, message, duration).show()
+}
+
+fun Context.toast(message: Int, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(this, getString(message), duration).show()
 }

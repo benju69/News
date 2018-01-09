@@ -12,7 +12,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
-import android.widget.Toast
 import bind
 import com.gonin.news.EXTRA_ARTICLE
 import com.gonin.news.R
@@ -20,6 +19,7 @@ import com.gonin.news.api.NewsService
 import com.gonin.news.model.Articles
 import com.gonin.news.model.ArticlesItem
 import com.gonin.news.ui.detail.ArticleDetailActivity
+import toast
 
 class NewsListActivity : AppCompatActivity(),
         NewsListContract.View,
@@ -56,7 +56,7 @@ class NewsListActivity : AppCompatActivity(),
     }
 
     override fun showErrorMessage() {
-        Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show()
+        toast(R.string.error)
     }
 
     override fun setArticlesList(articles: Articles) {
