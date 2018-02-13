@@ -4,20 +4,20 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class ArticlesItem(
-        val publishedAt: String? = null,
-        val author: String? = null,
-        val urlToImage: String? = null,
-        val description: String? = null,
-        val title: String? = null,
-        val url: String? = null
+    val publishedAt: String? = null,
+    val author: String? = null,
+    val urlToImage: String? = null,
+    val description: String? = null,
+    val title: String? = null,
+    val url: String? = null
 ) : Parcelable {
     constructor(source: Parcel) : this(
-            source.readString(),
-            source.readString(),
-            source.readString(),
-            source.readString(),
-            source.readString(),
-            source.readString()
+        source.readString(),
+        source.readString(),
+        source.readString(),
+        source.readString(),
+        source.readString(),
+        source.readString()
     )
 
     override fun describeContents() = 0
