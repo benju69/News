@@ -7,8 +7,8 @@
 
         <item name="android:windowContentTransitions" tools:targetApi="lollipop">true</item>
 
-        <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/julius_sans_one</item>
-        <!--<item name="android:fontFamily" tools:targetApi="jelly_bean">@font/source_sans_pro_regular</item>-->
+        <!--<item name="android:fontFamily" tools:targetApi="jelly_bean">@font/julius_sans_one</item>-->
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/source_sans_pro_regular</item>
     </style>
 
 </resources>

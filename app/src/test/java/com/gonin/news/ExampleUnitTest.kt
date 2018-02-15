@@ -1,8 +1,8 @@
 package com.gonin.news
 
+import org.junit.Assert
+import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import org.junit.Assert.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -13,9 +13,13 @@ import org.junit.Assert.*
 class ExampleUnitTest {
 
     @Test
-    @Throws(Exception::class)
     fun `addition is correct`() {
         assertEquals(4, (2 + 2).toLong())
     }
+
+//    @Test
+//    fun `addition is wrong`() {
+//        Assert.assertEquals(5, 2 + 2)
+//    }
 
 }

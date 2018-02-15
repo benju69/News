@@ -16,13 +16,14 @@
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:transitionName="image"
-            app:srcCompat="@drawable/ic_error_outline_black_24dp"
-            tools:targetApi="lollipop" />
+            android:src="@drawable/ic_error_outline_black_24dp"
+            tools:targetApi="lollipop"
+            tools:ignore="ContentDescription" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/small_padding"
+            android:layout_margin="@dimen/large_padding"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -30,7 +31,7 @@
                 android:id="@+id/titleDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_padding"
+                android:layout_marginBottom="@dimen/small_padding"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 tools:text="title" />
@@ -39,7 +40,11 @@
                 android:id="@+id/authorDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_padding"
+                android:layout_marginBottom="@dimen/small_padding"
+                android:drawableLeft="@drawable/ic_person_black_24dp"
+                android:drawableStart="@drawable/ic_person_black_24dp"
+                android:drawablePadding="@dimen/small_padding"
+                android:gravity="center"
                 android:textColor="@color/black"
                 tools:text="author" />
 
@@ -47,7 +52,7 @@
                 android:id="@+id/dateDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_padding"
+                android:layout_marginBottom="@dimen/small_padding"
                 android:textColor="@color/black"
                 tools:text="date" />
 
@@ -55,14 +60,15 @@
                 android:id="@+id/descDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_padding"
+                android:layout_marginBottom="@dimen/small_padding"
                 tools:text="desc" />
 
             <Button
                 android:id="@+id/openArticleButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_padding"
+                android:drawableLeft="@drawable/ic_open_in_new_black_24dp"
+                android:drawableStart="@drawable/ic_open_in_new_black_24dp"
                 android:text="@string/open.article" />
 
         </LinearLayout>
