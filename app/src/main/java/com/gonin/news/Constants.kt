@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat
 /**
  * Created by benju on 20/10/2017.
  */
-val baseUrl = " https://newsapi.org/v1/"
+const val baseUrl = " https://newsapi.org/v1/"
 
 val source = "espn"
 
