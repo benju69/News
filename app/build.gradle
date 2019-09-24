@@ -47,7 +47,7 @@ dependencies {
         // exclude Retrofit’s OkHttp peer-dependency module and define your own module import
         exclude module: 'okhttp'
     }
-    compile 'com.squareup.retrofit2:converter-moshi:2.3.0'
+    compile 'com.squareup.retrofit2:converter-moshi:2.6.2'
 
     compile 'com.squareup.okhttp3:okhttp:3.9.1' // Okhttp : Http client : http://square.github.io/okhttp/
     compile 'com.squareup.okhttp3:logging-interceptor:3.9.1'
