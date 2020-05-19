@@ -43,7 +43,7 @@ dependencies {
 
     compile 'com.android.support.constraint:constraint-layout:1.0.2' // TODO upgrade to 1.1 beta
 
-    compile ('com.squareup.retrofit2:retrofit:2.3.0') { // Retrofit : http://square.github.io/retrofit/
+    compile ('com.squareup.retrofit2:retrofit:2.8.2') { // Retrofit : http://square.github.io/retrofit/
         // exclude Retrofit’s OkHttp peer-dependency module and define your own module import
         exclude module: 'okhttp'
     }
